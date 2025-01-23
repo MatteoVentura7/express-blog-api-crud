@@ -8,6 +8,7 @@ const employersRouter = require("./routers/employersRouter");
 //const postRouter = require("./routers/post.js");
 
 app.use(express.static("public"));
+app.use(express.json());
 
 app.get("/", (req, res) => {
   res.send("Server del mio Blog");
