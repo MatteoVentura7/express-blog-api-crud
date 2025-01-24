@@ -5,7 +5,11 @@ const port = 3000;
 // ROUTER
 const postRouter = require("./routers/postRouter");
 const employersRouter = require("./routers/employersRouter");
-//const postRouter = require("./routers/post.js");
+
+// Importazione midddleware
+
+const validatorFound = require("./middlewares/validatorFound");
+const validatorError = require("./middlewares/validatorError");
 
 app.use(express.static("public"));
 app.use(express.json());
@@ -18,7 +22,11 @@ app.get("/", (req, res) => {
 
 app.use("/post", postRouter);
 app.use("/employers", employersRouter);
-// app.use("/post", postRouter);
+
+// middleware che gestisce gli errori 404
+app.use(validatorFound);
+// middleware che gestisce gli errori interni del server
+app.use(validatorError);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
